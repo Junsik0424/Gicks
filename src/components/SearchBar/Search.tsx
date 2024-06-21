@@ -38,11 +38,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
-  margin-bottom: 57%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  margin-top: 3%;
 `;
 
 const SearchBox = styled.div`
@@ -50,11 +48,9 @@ const SearchBox = styled.div`
   align-items: center;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 8px;
   width: 700px;
   height: 30px;
-  margin-left: 200px;
-  margin-top: 20px;
 `;
 
 const StyledInput = styled.input`
