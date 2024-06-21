@@ -16,7 +16,7 @@ const DrawerContainer = styled.div<{ isOpen: boolean }>`
   position: relative;
   top: 0;
   left: 0;
-  min-width: ${(props) => (props.isOpen ? "250px" : "60px")};
+  width: ${(props) => (props.isOpen ? "250px" : "60px")};
   height: 100vh;
   background-color: transparent;
   overflow-x: hidden;
