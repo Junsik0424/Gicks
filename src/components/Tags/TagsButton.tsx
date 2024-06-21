@@ -11,9 +11,8 @@ const StyledButton = styled.button<{ selected: boolean }>`
   background-color: ${(props) => (props.selected ? "black" : "#e0e0e0")};
   color: ${(props) => (props.selected ? "white" : "black")};
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 8px 16px;
-  margin: 4px;
   cursor: pointer;
   font-size: 16px;
 

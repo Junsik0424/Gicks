@@ -7,6 +7,7 @@ const TagContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
+  gap: 6px;
 `;
 
 const tags = ["전체", "스터디", "택시", "공동구매", "배달"];

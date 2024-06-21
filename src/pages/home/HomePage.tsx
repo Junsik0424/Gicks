@@ -8,36 +8,30 @@ import Search from "src/components/SearchBar/Search";
 import Tags from "src/components/Tags/Tags";
 import styled from "styled-components";
 
-const OpenButton = styled.button`
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #a5d6a7;
-  border: none;
-  color: white;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #7cb342;
-  }
-`;
-
 const Home = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
-  width: 100%;
-  height: 100%;
+  justify-content: space-between;
   height: 100vh;
 `;
-const RightContainer = styled.div`
-  width: 100%;
+
+const DrawerContainer = styled.div`
+  width: max-content;
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
-  margin-left: 30px;
+  align-items: center;
+`;
+
+const RightContainer = styled.div`
+  width: fit-content;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 20px;
 `;
 const TopContainer = styled.div`
   width: 100%;
@@ -46,10 +40,11 @@ const TopContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  vertical-align: middle;
+  align-items: center;
 `;
 const LoginContainer = styled.div`
   display: flex;
-  margin-top: 3%;
 `;
 const LoginButton = styled.button`
   background-color: #60ce72;
@@ -57,11 +52,11 @@ const LoginButton = styled.button`
   color: white;
   text-align: center;
   display: inline-block;
-  font-size: 20px;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 6px;
-  width: 100px;
-  height: 50px;
+  border-radius: 8px;
+  width: 5rem;
+  height: 48px;
 
   &:hover {
     background-color: #45a049;
@@ -74,6 +69,7 @@ const BottomContainer = styled.div`
   flex-direction: column;
 `;
 const CardsContainer = styled.div`
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -120,25 +116,31 @@ const cardsData = [
 
 const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState<string>("");
   const modalContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleOpenModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  const handleOpenModal = (modalContentId: string) => {
+    setShowModal(true);
+    setModalContent(modalContentId);
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setModalContent("");
+  };
+
   return (
     <Home ref={modalContainerRef}>
-      <Drawer />
-      {/* <h1>모달 컨테이adfalskdjfals;kfj;asdlkfjas;lkfjasdl;fj너</h1>
-      <OpenButton onClick={handleOpenModal}>모달 열기</OpenButton>
       <Modal
         show={showModal}
+        id={modalContent}
         onClose={handleCloseModal}
         containerRef={modalContainerRef}
       >
-        <h1>모달 제목</h1>
-        <p>이것은 모달의 내용입니다.</p>
-      </Modal> */}
-      {/* 이거 주석처리 안하면 이상해짐 원래 card 클릭했을 때 실행하게끔 해야하는데 어케하는지 모르겠음 */}
-
+        <p>{modalContent}</p>
+      </Modal>
+      <DrawerContainer>
+        <Drawer />
+      </DrawerContainer>
       <RightContainer>
         <TopContainer>
           <Search />
@@ -150,7 +152,14 @@ const HomePage = () => {
         <BottomContainer>
           <CardsContainer>
             {cardsData.map((card, index) => (
-              <Card key={index} {...card} />
+              <Card
+                key={index}
+                title={card.title}
+                content={card.content}
+                remaining={card.remaining}
+                time={card.time}
+                onClick={() => handleOpenModal(card.content)}
+              />
             ))}
           </CardsContainer>
         </BottomContainer>
