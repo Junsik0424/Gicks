@@ -66,6 +66,8 @@ const LoginButton = styled.button`
     background-color: #45a049;
   }
 `;
+const StyledLink = styled.a``;
+
 const BottomContainer = styled.div`
   height: 100%;
   width: 100%;
@@ -170,7 +172,9 @@ const HomePage = () => {
         <TopContainer>
           <Search />
           <LoginContainer>
-            <LoginButton>로그인</LoginButton>
+            <StyledLink href="/login">
+              <LoginButton>로그인</LoginButton>
+            </StyledLink>
           </LoginContainer>
         </TopContainer>
         <Tags />
