@@ -11,32 +11,39 @@ const StyledContainer = styled.div`
 const StyledImg = styled.img`
   width: 186px;
   height: 60;
-  margin-top: 5%;
-  margin-bottom: 1%;
+  margin-top: 43%;
 `;
 
-const StyledButton = styled.div`
+const StyledButton = styled.button`
   background-color: #60ce72;
   border: none;
   color: white;
   padding: 15px 32px;
   text-align: center;
+  display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 6px;
-  width: 350px;
-  height: 40px;
+  margin-top: 2%;
+  width: 400px;
+  height: 50px;
 
   &:hover {
     background-color: #45a049;
   }
 `;
 const StyledInput = styled.input`
+  color: gray;
   border-color: #d0d0d0;
   border-radius: 6px;
-  width: 350px;
+  width: 400px;
   height: 40px;
+`;
+
+const StyledP = styled.p`
+  margin-bottom: 3px;
+  margin-top: 10px;
 `;
 
 const SignUpPage = () => {
@@ -61,7 +68,7 @@ const SignUpPage = () => {
         <StyledImg src="src\assets\logo.svg" />
       </a>
       <div>
-        <p>ID</p>
+        <StyledP>ID</StyledP>
         <StyledInput
           type="email"
           placeholder="ID를 입력하세요"
@@ -70,7 +77,7 @@ const SignUpPage = () => {
         />
       </div>
       <div>
-        <p>비밀번호</p>
+        <StyledP>비밀번호</StyledP>
         <StyledInput
           type="password"
           placeholder="비밀번호를 입력하세요"
@@ -79,7 +86,7 @@ const SignUpPage = () => {
         />
       </div>
       <div>
-        <p>비밀번호 확인</p>
+        <StyledP>비밀번호 확인</StyledP>
         <StyledInput
           type="password"
           placeholder="비밀번호를 다시 한 번 입력하세요"
@@ -88,7 +95,7 @@ const SignUpPage = () => {
         />
       </div>
       <div>
-        <p>소속 학과</p>
+        <StyledP>소속 학과</StyledP>
         <StyledInput
           type="department"
           placeholder="예) 전기전자컴퓨터공학부"
@@ -97,7 +104,7 @@ const SignUpPage = () => {
         />
       </div>
       <div>
-        <p>학번</p>
+        <StyledP>학번</StyledP>
         <StyledInput
           type="studentId"
           placeholder="학번을 입력하세요"
