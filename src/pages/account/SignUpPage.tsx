@@ -39,7 +39,7 @@ const StyledButton = styled.button`
   font-size: 16px;
   margin-top: 20px;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 10px;
   width: 100%;
   max-width: 430px;
   transition:
@@ -60,7 +60,7 @@ const StyledButton = styled.button`
 // 입력 필드 스타일
 const StyledInput = styled.input`
   border: 1px solid #d0d0d0;
-  border-radius: 6px;
+  border-radius: 10px;
   width: 400px;
   max-width: 400px;
   height: 50px;
