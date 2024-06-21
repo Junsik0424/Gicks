@@ -1,40 +1,5 @@
-// import React from "react";
-// import styled from "styled-components";
-
-// const SearchContainer = styled.div`
-//   display: flex;
-//   flex-direction: row;
-// `;
-
-// const InputSearch = styled.input`
-//   color: #d0d0d0;
-//   width: 700px;
-//   height: 30px;
-//   border-radius: 6px;
-//   background-image: url(src\assets\search.svg);
-// `;
-
-// const SearchButton = styled.button`
-//   background-color: white;
-//   border-color: white;
-// `;
-
-// const ImgButton = styled.img``;
-
-// const Search: React.FC = () => {
-//   return (
-//     <SearchContainer>
-//       <InputSearch type="text" placeholder="검색어를 입력하세요"></InputSearch>
-//       <SearchButton type="button">
-//         <ImgButton src="src\assets\search.svg" alt="버튼" />
-//       </SearchButton>
-//     </SearchContainer>
-//   );
-// };
-
-// export default Search;
-
 import React, { useState } from "react";
+import SearchIcon from "src/assets/search.svg";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
@@ -94,7 +59,7 @@ const Search = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         <SearchButton onClick={handleSearch}>
-          <img src="src\assets\search.svg" />
+          <SearchIcon />
         </SearchButton>
       </SearchBox>
     </StyledContainer>
