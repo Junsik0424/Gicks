@@ -1,3 +1,5 @@
+import "src/components/styles.css";
+
 import { useRef, useState } from "react";
 import Modal from "src/components/Modal/Modal";
 import Drawer from "src/components/NavDrawer/Drawer";
