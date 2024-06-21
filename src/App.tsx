@@ -1,46 +1,52 @@
-import "./App.css";
+import "src/components/styles.css";
 
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import styled, { CSSProperties } from "styled-components";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import ReactLogo from "./assets/react.svg?react";
+import LoginForm from "./components/logNregPage/LoginForm";
+// import RegisterForm from "./components/RegisterForm";
+// import login from "./login";
 
-const ReadTheDocs = styled.p<{
-  $color?: CSSProperties["color"];
-}>`
-  color: ${({ $color }) => $color ?? "red"};
-`;
-
-function App() {
-  const [count, setCount] = useState(0);
-  const { t } = useTranslation("main");
-
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src="/src/assets/react.svg" className="logo" alt="Vite logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <ReadTheDocs $color={"blue"}>
-        {t("title")}
-        <ReactLogo width={16} height={16} />
-      </ReadTheDocs>
-    </div>
+    // <div id="whole">
+    //   <div className="left-navigation">
+    //     <div id="1-section">
+    //       <div id="icon-home"></div>
+    //     </div>
+    //     <div id="2-section">
+    //       <div id="icon-study"></div>
+    //       <div id="icon-taxi"></div>
+    //       <div id="icon-purchase"></div>
+    //       <div id="icon-etc"></div>
+    //     </div>
+    //     <div id="3-section">
+    //       <div id="chatroom"></div>
+    //     </div>
+    //     <div id="4-section">
+    //       <div id="writing"></div>
+    //     </div>
+    //   </div>
+    //   <div className="top">
+    //     <div className="top-search"></div>
+    //     <div className="login-btn">
+    //       <Router>
+    //         <Routes>
+    //           <Route path="/login" element={<LoginForm />} />
+    //         </Routes>
+    //       </Router>
+    //     </div>
+    //     <div className="tags">
+    //       <div id="all-tag"></div>
+    //       <div id="study-tag"></div>
+    //       <div id="taxi-tag"></div>
+    //       <div id="purchase-tag"></div>
+    //       <div id="delivery-tag"></div>
+    //     </div>
+    //   </div>
+    //   <div></div>
+    // </div>
   );
-}
+};
 
 export default App;
