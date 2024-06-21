@@ -36,7 +36,6 @@ const RightContainer = styled.div`
   padding-right: 20px;
   gap: 14px;
 `;
-
 const TopContainer = styled.div`
   width: 100%;
   height: 130px;
@@ -48,11 +47,9 @@ const TopContainer = styled.div`
   align-items: center;
   margin-top: 20px;
 `;
-
 const LoginContainer = styled.div`
   display: flex;
 `;
-
 const LoginButton = styled.button`
   background-color: #60ce72;
   border: none;
@@ -69,16 +66,12 @@ const LoginButton = styled.button`
     background-color: #45a049;
   }
 `;
-
-const StyledLink = styled.a``;
-
 const BottomContainer = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
 `;
-
 const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -111,7 +104,7 @@ export type contentType = {
 
 const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState<any>(null);
+  const [modalContent, setModalContent] = useState<string>("");
   const modalContainerRef = useRef<HTMLDivElement>(null);
 
   const [content, setContent] = useState<cardType[]>([]);
@@ -119,11 +112,11 @@ const HomePage = () => {
 
   const handleOpenModal = (modalContentId: string) => {
     setShowModal(true);
+    setModalContent(modalContentId);
   };
-
   const handleCloseModal = () => {
     setShowModal(false);
-    setModalContent(null);
+    setModalContent("");
   };
 
   const fetchContent = async () => {
@@ -134,7 +127,7 @@ const HomePage = () => {
       );
       if (response.status === 200) {
         const fetchedContent: contentType[] = response.data;
-
+        console.log(response.data);
         // 데이터를 예시 데이터 형식으로 변환
         const transformedData = fetchedContent.map((item) => ({
           uuid: item.uuid,
@@ -161,20 +154,13 @@ const HomePage = () => {
 
   return (
     <Home ref={modalContainerRef}>
-      {modalContent && (
-        <Modal
-          show={showModal}
-          id={modalContent.title}
-          onClose={handleCloseModal}
-          containerRef={modalContainerRef}
-          title={modalContent.title}
-          content={modalContent.content}
-          remaining={modalContent.remaining}
-          time={modalContent.time}
-        >
-          <></>
-        </Modal>
-      )}
+      <LoadingOverlay loading={loading} />
+      <Modal
+        show={showModal}
+        id={modalContent}
+        onClose={handleCloseModal}
+        containerRef={modalContainerRef}
+      />
       <DrawerContainer>
         <Drawer />
       </DrawerContainer>
@@ -182,9 +168,9 @@ const HomePage = () => {
         <TopContainer>
           <Search />
           <LoginContainer>
-            <StyledLink href="/login">
+            <a href="/login">
               <LoginButton>로그인</LoginButton>
-            </StyledLink>
+            </a>
           </LoginContainer>
         </TopContainer>
         <Tags />
@@ -199,7 +185,7 @@ const HomePage = () => {
                 body={data.content}
                 remaining={data.remaining}
                 time={data.time}
-                onClick={() => handleOpenModal(data.content)}
+                onClick={() => handleOpenModal(data.uuid)}
               />
             ))}
           </CardsContainer>
