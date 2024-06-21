@@ -16,8 +16,7 @@ const DrawerContainer = styled.div<{ isOpen: boolean }>`
   position: relative;
   top: 0;
   left: 0;
-  width: ${(props) =>
-    props.isOpen ? "250px" : "60px"}; // 드로어가 숨겨졌을 때 폭을 최소화
+  min-width: ${(props) => (props.isOpen ? "250px" : "60px")};
   height: 100vh;
   background-color: transparent;
   overflow-x: hidden;
