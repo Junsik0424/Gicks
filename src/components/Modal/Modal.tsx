@@ -7,6 +7,10 @@ interface ModalProps {
   onClose: () => void;
   children: ReactNode;
   containerRef: React.RefObject<HTMLDivElement>;
+  title: string;
+  content: string;
+  remaining: number;
+  time: string;
 }
 
 const ModalOverlay = styled.div<{ show: boolean }>`
@@ -41,12 +45,36 @@ const CloseButton = styled.button`
   font-size: 20px;
   cursor: pointer;
 `;
+const ChatButton = styled.button`
+  background-color: #60ce72;
+  border: none;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 5rem;
+  height: 48px;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+const ChatBtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 const Modal: React.FC<ModalProps> = ({
   show,
   onClose,
   children,
   containerRef,
+  title,
+  content,
+  remaining,
+  time,
 }) => {
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -73,6 +101,13 @@ const Modal: React.FC<ModalProps> = ({
     <ModalOverlay show={show} onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={onClose}>&times;</CloseButton>
+        <h2>{title}</h2>
+        <p>내용: {content}</p>
+        <p>남은 인원수: {remaining}</p>
+        <p>시간: {time}</p>
+        <ChatBtnContainer>
+          <ChatButton>입장하기</ChatButton>
+        </ChatBtnContainer>
         {children}
       </ModalContent>
     </ModalOverlay>
