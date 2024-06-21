@@ -19,11 +19,11 @@
     "baseUrl": "./",
     "paths": {
       "@types/*": ["src/@types/*"],
-      "@types": ["src/@types"]
+      "@types": ["src/@types"],
     },
     "typeRoots": ["./node_modules/@types/", "./src/@types/"],
-    "types": ["vite-plugin-svgr/client"]
+    "types": ["vite-plugin-svgr/client"],
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
 }
