@@ -10,7 +10,16 @@ const TagContainer = styled.div`
   gap: 6px;
 `;
 
-const tags = ["전체", "스터디", "택시", "공동구매", "배달"];
+const tags = [
+  "전체",
+  "맞춤 추천",
+  "공부",
+  "시험 기간",
+  "식사",
+  "운동",
+  "음악",
+  "휴식",
+];
 
 const Tags: React.FC = () => {
   const [selectedTag, setSelectedTag] = useState<string>("전체");
