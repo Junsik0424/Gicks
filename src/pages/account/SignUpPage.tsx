@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Logo from "src/assets/logo.svg";
 import styled from "styled-components";
 
 // 메인 컨테이너 스타일
@@ -13,11 +14,9 @@ const StyledContainer = styled.div`
   padding: 0;
 `;
 
-// 로고 이미지 스타일
-const StyledImg = styled.img`
-  width: 186px;
+const LogoContainer = styled.div`
   height: auto;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   animation: fadeIn 1s ease-in-out;
 
   @keyframes fadeIn {
@@ -132,7 +131,9 @@ const SignUpPage = () => {
   return (
     <StyledContainer>
       <a href="/">
-        <StyledImg src="src/assets/logo.svg" alt="로고" />
+        <LogoContainer>
+          <Logo />
+        </LogoContainer>
       </a>
       <div>
         <StyledP>이름</StyledP>
