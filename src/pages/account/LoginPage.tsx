@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Logo from "src/assets/logo.svg";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
@@ -12,10 +13,9 @@ const StyledContainer = styled.div`
   padding: 0;
 `;
 
-const StyledImg = styled.img`
-  width: 200px;
+const LogoContainer = styled.div`
   height: auto;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   animation: fadeIn 1s ease-in-out;
 
   @keyframes fadeIn {
@@ -129,7 +129,9 @@ const LoginPage = () => {
   return (
     <StyledContainer>
       <a href="/">
-        <StyledImg src="src/assets/logo.svg" alt="로고" />
+        <LogoContainer>
+          <Logo />
+        </LogoContainer>
       </a>
       <StyledInput
         isTop={true}
