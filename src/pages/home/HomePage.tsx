@@ -1,7 +1,9 @@
 import "src/components/styles.css";
 
-import { useRef, useState } from "react";
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 import Card from "src/components/Card/Card";
+import LoadingOverlay from "src/components/Loading/LoadingOverlay";
 import Modal from "src/components/Modal/Modal";
 import Drawer from "src/components/NavDrawer/Drawer";
 import Search from "src/components/SearchBar/Search";
@@ -75,62 +77,38 @@ const CardsContainer = styled.div`
   flex-wrap: wrap;
   gap: 20px;
 `;
-const cardsData = [
-  {
-    title: "최익준",
-    content: "선형대수학(김재길 교수님) 스터디 인원 모집합니다",
-    remaining: "3명 남음",
-    time: "1일전",
-  },
-  {
-    title: "엄현식",
-    content:
-      "제목이 긴 게시물의 경우 두줄까지만 표시하고 이렇게 남는 부분은 잘라서 표...",
-    remaining: "1명 남음",
-    time: "1일전",
-  },
-  {
-    title: "서강현",
-    content: "짧아도 최소 높이 존재",
-    remaining: "6명 남음",
-    time: "1일전",
-  },
-  {
-    title: "Card Title 4",
-    content: "Card content goes here.",
-    remaining: "4명 남음",
-    time: "2일전",
-  },
-  {
-    title: "Card Title 5",
-    content: "Card content goes here.",
-    remaining: "5명 남음",
-    time: "3일전",
-  },
-  {
-    title: "Card Title 6",
-    content: "Card content goes here.",
-    remaining: "6명 남음",
-    time: "4일전",
-  },
-  {
-    title: "Card Title 6",
-    content: "Card content goes here.",
-    remaining: "6명 남음",
-    time: "4일전",
-  },
-  {
-    title: "Card Title 6",
-    content: "Card content goes here.",
-    remaining: "6명 남음",
-    time: "4일전",
-  },
-];
+
+export type cardType = {
+  uuid: string;
+  title: string;
+  content: string;
+  remaining: string;
+  time: string;
+};
+
+export type contentType = {
+  uuid: string;
+  title: string;
+  body: string;
+  createdAt: Date;
+  deletedAt?: Date;
+  Deadline: Date;
+  HeadCount: number;
+  authorId: string;
+  author: {
+    name: string;
+    studentId: string;
+  };
+  Comment: string[];
+};
 
 const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState<string>("");
   const modalContainerRef = useRef<HTMLDivElement>(null);
+
+  const [content, setContent] = useState<cardType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleOpenModal = (modalContentId: string) => {
     setShowModal(true);
@@ -141,8 +119,42 @@ const HomePage = () => {
     setModalContent("");
   };
 
+  const fetchContent = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/contents`,
+      );
+      if (response.status === 200) {
+        const fetchedContent: contentType[] = response.data;
+
+        // 데이터를 예시 데이터 형식으로 변환
+        const transformedData = fetchedContent.map((item) => ({
+          uuid: item.uuid,
+          title: item.author.name,
+          content: item.body,
+          remaining: `${item.HeadCount}명 남음`,
+          time: new Date(item.createdAt).toLocaleDateString("ko-KR"),
+        }));
+
+        setContent(transformedData);
+      } else {
+        console.error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchContent();
+  }, []);
+
   return (
     <Home ref={modalContainerRef}>
+      <LoadingOverlay loading={loading} />
       <Modal
         show={showModal}
         id={modalContent}
@@ -164,14 +176,16 @@ const HomePage = () => {
         <Tags />
         <BottomContainer>
           <CardsContainer>
-            {cardsData.map((card, index) => (
+            {content.map((data, index) => (
               <Card
+                uuid={data.uuid}
                 key={index}
-                title={card.title}
-                content={card.content}
-                remaining={card.remaining}
-                time={card.time}
-                onClick={() => handleOpenModal(card.content)}
+                title={data.title}
+                content={data.content}
+                body={data.content}
+                remaining={data.remaining}
+                time={data.time}
+                onClick={() => handleOpenModal(data.content)}
               />
             ))}
           </CardsContainer>
