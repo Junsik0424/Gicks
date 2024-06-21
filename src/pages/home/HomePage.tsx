@@ -36,6 +36,7 @@ const RightContainer = styled.div`
   padding-right: 20px;
   gap: 14px;
 `;
+
 const TopContainer = styled.div`
   width: 100%;
   height: 130px;
@@ -47,9 +48,11 @@ const TopContainer = styled.div`
   align-items: center;
   margin-top: 20px;
 `;
+
 const LoginContainer = styled.div`
   display: flex;
 `;
+
 const LoginButton = styled.button`
   background-color: #60ce72;
   border: none;
@@ -66,12 +69,14 @@ const LoginButton = styled.button`
     background-color: #45a049;
   }
 `;
+
 const BottomContainer = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
 `;
+
 const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -109,11 +114,13 @@ const HomePage = () => {
 
   const [content, setContent] = useState<cardType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const handleOpenModal = (modalContentId: string) => {
     setShowModal(true);
     setModalContent(modalContentId);
   };
+
   const handleCloseModal = () => {
     setShowModal(false);
     setModalContent("");
@@ -148,7 +155,25 @@ const HomePage = () => {
     }
   };
 
+  const checkLoginStatus = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (accessToken && refreshToken) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  };
+
+  const handleLogout = () => {
+    alert("로그아웃 되었습니다.");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    setIsLoggedIn(false);
+  };
+
   useEffect(() => {
+    checkLoginStatus();
     fetchContent();
   }, []);
 
@@ -168,9 +193,13 @@ const HomePage = () => {
         <TopContainer>
           <Search />
           <LoginContainer>
-            <a href="/login">
-              <LoginButton>로그인</LoginButton>
-            </a>
+            {isLoggedIn ? (
+              <LoginButton onClick={handleLogout}>로그아웃</LoginButton>
+            ) : (
+              <a href="/login">
+                <LoginButton>로그인</LoginButton>
+              </a>
+            )}
           </LoginContainer>
         </TopContainer>
         <Tags />
