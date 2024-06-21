@@ -4,5 +4,6 @@
     "noEmit": true // prevent building with this configuration
   },
   "include": ["src/**/*", "vite.config.ts"], // include all TypeScript files
+  "exclude": ["**/*.d.ts"], // exclude all declaration files
   "exclude": ["node_modules"] // don't exclude any TypeScript files
 }
