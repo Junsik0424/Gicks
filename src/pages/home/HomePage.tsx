@@ -34,6 +34,7 @@ const RightContainer = styled.div`
   padding-right: 20px;
   gap: 14px;
 `;
+
 const TopContainer = styled.div`
   width: 100%;
   height: 130px;
@@ -45,9 +46,11 @@ const TopContainer = styled.div`
   align-items: center;
   margin-top: 20px;
 `;
+
 const LoginContainer = styled.div`
   display: flex;
 `;
+
 const LoginButton = styled.button`
   background-color: #60ce72;
   border: none;
@@ -64,6 +67,7 @@ const LoginButton = styled.button`
     background-color: #45a049;
   }
 `;
+
 const StyledLink = styled.a``;
 
 const BottomContainer = styled.div`
@@ -72,11 +76,13 @@ const BottomContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 `;
+
 const cardsData = [
   {
     title: "최익준",
@@ -131,28 +137,35 @@ const cardsData = [
 
 const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState<string>("");
+  const [modalContent, setModalContent] = useState<any>(null);
   const modalContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleOpenModal = (modalContentId: string) => {
+  const handleOpenModal = (card: any) => {
+    setModalContent(card);
     setShowModal(true);
-    setModalContent(modalContentId);
   };
+
   const handleCloseModal = () => {
     setShowModal(false);
-    setModalContent("");
+    setModalContent(null);
   };
 
   return (
     <Home ref={modalContainerRef}>
-      <Modal
-        show={showModal}
-        id={modalContent}
-        onClose={handleCloseModal}
-        containerRef={modalContainerRef}
-      >
-        <p>{modalContent}</p>
-      </Modal>
+      {modalContent && (
+        <Modal
+          show={showModal}
+          id={modalContent.title}
+          onClose={handleCloseModal}
+          containerRef={modalContainerRef}
+          title={modalContent.title}
+          content={modalContent.content}
+          remaining={modalContent.remaining}
+          time={modalContent.time}
+        >
+          <></>
+        </Modal>
+      )}
       <DrawerContainer>
         <Drawer />
       </DrawerContainer>
@@ -175,7 +188,7 @@ const HomePage = () => {
                 content={card.content}
                 remaining={card.remaining}
                 time={card.time}
-                onClick={() => handleOpenModal(card.content)}
+                onClick={() => handleOpenModal(card)}
               />
             ))}
           </CardsContainer>
