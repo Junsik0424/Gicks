@@ -55,14 +55,17 @@ const BottomContainer = styled.div`
 `;
 
 interface CardProps {
+  uuid: string;
   title: string;
   content: string;
+  body: string;
   remaining: string;
   time: string;
   onClick?: () => void;
 }
 
 const Card: React.FC<CardProps> = ({
+  uuid,
   title,
   content,
   remaining,
@@ -70,7 +73,7 @@ const Card: React.FC<CardProps> = ({
   onClick,
 }) => {
   return (
-    <CardContainer onClick={onClick}>
+    <CardContainer onClick={onClick} key={uuid}>
       <ProfileContainer>
         <ProfileIcon />
         <Author>{title}</Author>
