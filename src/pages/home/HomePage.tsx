@@ -32,6 +32,7 @@ const RightContainer = styled.div`
   flex-direction: column;
   padding-left: 10px;
   padding-right: 20px;
+  gap: 14px;
 `;
 const TopContainer = styled.div`
   width: 100%;
@@ -42,6 +43,7 @@ const TopContainer = styled.div`
   justify-content: space-between;
   vertical-align: middle;
   align-items: center;
+  margin-top: 20px;
 `;
 const LoginContainer = styled.div`
   display: flex;
@@ -69,7 +71,6 @@ const BottomContainer = styled.div`
   flex-direction: column;
 `;
 const CardsContainer = styled.div`
-  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -105,6 +106,18 @@ const cardsData = [
     content: "Card content goes here.",
     remaining: "5명 남음",
     time: "3일전",
+  },
+  {
+    title: "Card Title 6",
+    content: "Card content goes here.",
+    remaining: "6명 남음",
+    time: "4일전",
+  },
+  {
+    title: "Card Title 6",
+    content: "Card content goes here.",
+    remaining: "6명 남음",
+    time: "4일전",
   },
   {
     title: "Card Title 6",
