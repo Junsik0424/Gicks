@@ -39,7 +39,7 @@ const HomePage = () => {
   return (
     <Home ref={modalContainerRef}>
       <Drawer />
-      <h1>모달 컨테이adfalskdjfals;kfj;asdlkfjas;lkfjasdl;fj너</h1>
+      <h1>홈 화면입니다.</h1>
       <OpenButton onClick={handleOpenModal}>모달 열기</OpenButton>
       <Modal
         show={showModal}
