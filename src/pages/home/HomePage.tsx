@@ -1,3 +1,4 @@
+import Drawer from "src/components/NavDrawer/Drawer";
 import styled from "styled-components";
 
 const Home = styled.div`
@@ -10,7 +11,7 @@ const Home = styled.div`
 const HomePage = () => {
   return (
     <Home>
-      <h1>Home Page</h1>
+      <Drawer />
     </Home>
   );
 };

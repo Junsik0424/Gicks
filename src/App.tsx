@@ -4,8 +4,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/account/LoginPage";
 import SignUpPage from "./pages/account/SignUpPage";
 import HomePage from "./pages/home/HomePage";
-// import RegisterForm from "./components/RegisterForm";
-// import login from "./login";
 
 const App: React.FC = () => {
   return (
