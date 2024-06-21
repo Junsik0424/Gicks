@@ -1,9 +1,12 @@
 import { useRef, useState } from "react";
 import Modal from "src/components/Modal/Modal";
 import Drawer from "src/components/NavDrawer/Drawer";
+import Search from "src/components/SearchBar/Search";
+import Tags from "src/components/Tags/Tags";
 import styled from "styled-components";
 
 const Home = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   position: relative;
@@ -44,8 +47,17 @@ const HomePage = () => {
         <h1>모달 제목</h1>
         <p>이것은 모달의 내용입니다.</p>
       </Modal>
+      <SearchContainer>
+        <Search />
+        <a href="http://localhost:3000/login">
+          <LoginButton>로그인</LoginButton>
+        </a>
+        <Tags />
+      </SearchContainer>
     </Home>
   );
 };
 
 export default HomePage;
+
+//버튼 styled component로 넣기
