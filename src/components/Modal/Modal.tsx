@@ -1,11 +1,11 @@
-import React, { ReactNode, useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface ModalProps {
   show: boolean;
   id: string;
   onClose: () => void;
-  children: ReactNode;
   containerRef: React.RefObject<HTMLDivElement>;
 }
 
@@ -41,13 +41,35 @@ const CloseButton = styled.button`
   font-size: 20px;
   cursor: pointer;
 `;
+const ChatButton = styled.button`
+  background-color: #60ce72;
+  border: none;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 5rem;
+  height: 48px;
 
-const Modal: React.FC<ModalProps> = ({
-  show,
-  onClose,
-  children,
-  containerRef,
-}) => {
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+const ChatBtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export type modalData = {
+  title: string;
+  content: string;
+  remaining: string;
+  time: string;
+};
+
+const Modal: React.FC<ModalProps> = ({ show, id, onClose, containerRef }) => {
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (
@@ -69,11 +91,50 @@ const Modal: React.FC<ModalProps> = ({
     };
   }, [show, containerRef, onClose]);
 
+  const [data, setData] = useState<modalData>({
+    title: "",
+    content: "",
+    remaining: "",
+    time: "",
+  });
+
+  const fetchModalData = async (contentUuid: string) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/contents/${contentUuid}`,
+      );
+      if (response.status === 200) {
+        const fetchedData: modalData = {
+          title: response.data.title,
+          content: response.data.body,
+          remaining: `${response.data.HeadCount}명 남음`,
+          time: new Date(response.data.createdAt).toLocaleDateString("ko-KR"),
+        };
+
+        setData(fetchedData);
+      } else {
+        console.log("error occured");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchModalData(id);
+  }, [id]);
+
   return (
     <ModalOverlay show={show} onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={onClose}>&times;</CloseButton>
-        {children}
+        <h2>{data.title}</h2>
+        <p>{data.content}</p>
+        <p>{data.remaining}</p>
+        <p>{data.time}</p>
+        <ChatBtnContainer>
+          <ChatButton>입장하기</ChatButton>
+        </ChatBtnContainer>
       </ModalContent>
     </ModalOverlay>
   );
